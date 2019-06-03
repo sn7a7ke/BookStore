@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BookStore.DAL.Interfaces;
+using BookStore.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BookStore.Models
+namespace BookStore.DAL.Repositories
 {
     public class BookRepository : IRepository<Book>
     {

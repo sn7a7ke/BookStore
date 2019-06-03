@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using BookStore.DAL.Models;
+using System.Collections.Generic;
 
-namespace BookStore.Models
+namespace BookStore.DAL.Interfaces
 {
     public interface IRepository<TEntity>
         where TEntity : BaseEntity

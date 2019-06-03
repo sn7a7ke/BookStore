@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BookStore.DAL.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BookStore.Models
+namespace BookStore.DAL
 {
     public class UnitOfWork //: IDisposable
     {        

@@ -125,12 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseEntity.cs" />
-    <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\BookRepository.cs" />
-    <Compile Include="Models\IRepository.cs" />
     <Compile Include="Models\MappingProfile.cs" />
-    <Compile Include="Models\UnitOfWork.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,6 +144,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore.DAL\BookStore.DAL.csproj">
+      <Project>{B04AFF20-849F-4C3D-B8D2-B8EDAAD9C0B9}</Project>
+      <Name>BookStore.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
