@@ -1,4 +1,6 @@
-﻿using BookStore.DAL.Repositories;
+﻿using BookStore.DAL.Interfaces;
+using BookStore.DAL.Models;
+using BookStore.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +8,12 @@ using System.Web;
 
 namespace BookStore.DAL
 {
-    public class UnitOfWork //: IDisposable
+    public class UnitOfWork : IUnitOfWork //: IDisposable
     {        
         //private DbContext db;
-        private BookRepository bookRepository;        
+        private IRepository<Book> bookRepository;        
 
-        public BookRepository Books
+        public IRepository<Book> Books
         {
             get
             {

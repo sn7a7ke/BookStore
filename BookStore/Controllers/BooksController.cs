@@ -12,12 +12,12 @@ namespace BookStore.Controllers
 {
     public class BooksController : Controller
     {        
-        private UnitOfWork unitOfWork;
+        private IUnitOfWork unitOfWork;
         private Book _book;
 
-        public BooksController()
+        public BooksController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = new UnitOfWork();
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: Books
