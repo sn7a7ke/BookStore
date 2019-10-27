@@ -12,7 +12,7 @@ namespace BookStore.Controllers
 {
     public class BooksController : Controller
     {        
-        private IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
         private Book _book;
 
         public BooksController(IUnitOfWork unitOfWork)
@@ -21,7 +21,6 @@ namespace BookStore.Controllers
         }
 
         // GET: Books
-
         public ActionResult Index()
         {
             var books =
@@ -112,10 +111,10 @@ namespace BookStore.Controllers
             }
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    unitOfWork.Dispose();
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
