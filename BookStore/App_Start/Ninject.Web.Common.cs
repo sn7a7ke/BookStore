@@ -4,8 +4,9 @@
 namespace BookStore.App_Start
 {
     using System;
+    using System.Data.Entity;
     using System.Web;
-
+    using BookStore.DAL;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -59,8 +60,15 @@ namespace BookStore.App_Start
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
+        //private static void RegisterServices(IKernel kernel)
+        //{
+        //}
+
         private static void RegisterServices(IKernel kernel)
         {
-        }        
+            kernel.Bind<BookStoreContext>().ToSelf().InRequestScope();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
+            //kernel.Bind<IBookRepository>().To<EmployeeRepository>();
+        }
     }
 }
