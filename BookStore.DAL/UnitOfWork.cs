@@ -34,6 +34,7 @@ namespace BookStore.DAL
 
         public void Reject()
         {
+            // https://medium.com/@utterbbq/c-unitofwork-and-repository-pattern-305cd8ecfa7a
             foreach (var entry in _dbContext.ChangeTracker.Entries()
                           .Where(e => e.State != EntityState.Unchanged))
             {
