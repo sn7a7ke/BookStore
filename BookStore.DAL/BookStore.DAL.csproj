@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookStoreContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Book.cs" />

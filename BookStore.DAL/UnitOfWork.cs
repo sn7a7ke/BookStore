@@ -1,41 +1,41 @@
-﻿using BookStore.DAL.Repositories;
+﻿using BookStore.DAL.Interfaces;
+using BookStore.DAL.Models;
+using BookStore.DAL.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace BookStore.DAL
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
-        private DbContext _dbContext;
-        private BookRepository bookRepository;
+        private readonly BookStoreContext _db;
+        private IRepository<Book> _bookRepository;
 
-        public UnitOfWork(DbContext db)
+        public UnitOfWork(BookStoreContext db)
         {
-            _dbContext = db ?? throw new ArgumentNullException(nameof(db));
+            _db = db ?? throw new ArgumentNullException(nameof(db));
         }
 
-        public BookRepository Books
+        public IRepository<Book> Books
         {
             get
             {
-                if (bookRepository == null)
-                    bookRepository = BookRepository.GetInstance();
-                return bookRepository;
+                if (_bookRepository == null)
+                    _bookRepository = BookRepository.GetInstance();
+                return _bookRepository;
             }
         }
-        
+
         public void Save()
         {
-            _dbContext.SaveChanges();
+            _db.SaveChanges();
         }
 
         public void Reject()
         {
             // https://medium.com/@utterbbq/c-unitofwork-and-repository-pattern-305cd8ecfa7a
-            foreach (var entry in _dbContext.ChangeTracker.Entries()
+            foreach (var entry in _db.ChangeTracker.Entries()
                           .Where(e => e.State != EntityState.Unchanged))
             {
                 switch (entry.State)
@@ -51,16 +51,15 @@ namespace BookStore.DAL
             }
         }
 
-        private bool _disposed = false;
-        public virtual void Dispose(bool disposing)
+        #region IDisposable Support
+        private bool disposedValue = false;
+        protected virtual void Dispose(bool disposing)
         {
-            if (!this._disposed)
+            if (!disposedValue)
             {
                 if (disposing)
-                {
-                    _dbContext.Dispose();
-                }
-                this._disposed = true;
+                    _db.Dispose();
+                disposedValue = true;
             }
         }
 
@@ -69,5 +68,6 @@ namespace BookStore.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }

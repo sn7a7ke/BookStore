@@ -2,26 +2,22 @@
 using BookStore.DAL;
 using BookStore.DAL.Models;
 using BookStore.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BookStore.Controllers
 {
     public class BooksController : Controller
     {        
-        private UnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
         private Book _book;
 
-        public BooksController()
+        public BooksController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = new UnitOfWork();
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: Books
-
         public ActionResult Index()
         {
             var books =
@@ -112,10 +108,10 @@ namespace BookStore.Controllers
             }
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    unitOfWork.Dispose();
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
